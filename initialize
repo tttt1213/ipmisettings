@@ -1,0 +1,30 @@
+git config --global user.name "tttt1213"
+git config --global user.email "mori.takuro.sw@gmail.com"
+git config --list 
+
+#workディレクトリに移動
+
+#ローカルリポジトリ作成
+git init
+
+#ログを確認（まだ何もない）
+git log
+
+#テストファイルを作成
+touch test.txt
+
+#インデックス（コミット前に変更内容を一時的に保存する領域）にtest.txtを追加。
+git add test.txt
+
+#コミット（インデックスに存在するファイルがローカルリポジトリへ追加）
+git commit -m "[Add]  test.txt"
+
+#ログを確認（コミットの履歴確認）
+git log
+
+
+git remote add origin https://github.com/ユーザ/rakus.git
+
+
+
+
