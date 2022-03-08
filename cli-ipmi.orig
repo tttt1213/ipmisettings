@@ -1,0 +1,54 @@
+#! /usr/bin/env python
+# encoding:utf-8
+
+import socket
+import sys
+
+ServerAddr= "localhost"
+ServerPort= 5625
+
+
+def interractMode():
+    while True:
+        mes= raw_input( ">")
+        if mes=="exit": break
+        print command(mes)
+        if mes.lower()=="quit": break
+
+def command( mes):
+
+    try:
+        clientSock= socket.socket()
+        clientSock.connect( ( ServerAddr, ServerPort))
+        clientSock.send( mes)
+        clientSock.shutdown( 1)
+        res=""
+        while True:
+            data= clientSock.recv( 2048)
+            if not data: break
+            res+=data
+        clientSock.close()
+        return res
+
+    except Exception as e:
+        print "autoUSB not reponding"
+        exit()
+
+def main():
+    argv=sys.argv
+    argc=len(argv)
+
+    if argc==1:
+        interractMode()
+        return    
+    
+    cmd=""
+    for i in range( 1, len( argv)):
+                cmd+= " "+argv[ i]
+    print command( cmd)
+    return
+
+
+if __name__=="__main__":
+    main()
+    exit()

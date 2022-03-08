@@ -1,14 +1,8 @@
-# ソケットライブラリ取り込み
 import socket
 
-# サーバーIPとポート番号
-IPADDR = "127.0.0.1"
-PORT = 49152
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.connect((socket.gethostname(), 1235))
+s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
-# ソケット作成
-sock = socket.socket(socket.AF_INET)
-# サーバーへ接続
-sock.connect((IPADDR, PORT))
-
-# byte 形式でデータ送信
-sock.send("hello".encode("utf-8"))
+msg = s.recv(1024)
+print(msg.decode("utf-8"))

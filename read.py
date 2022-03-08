@@ -1,12 +1,24 @@
-﻿import socket
+﻿#! /usr/bin/env python
+# encoding:utf-8
 
-host = "192.168.10.238"
-port = 8629 #適当なPORTを指定してあげます
-massage = ('192.168.20.95 NA read')
+from asyncore import read
+import socket
+import sys
 
-client = socket.socket(socket.AF_INET, socket.SOCK_STREAM) #オブジェクトの作成をします
-client.connect((host, port)) #これでサーバーに接続します
-client.send(massage.encode()) #適当なデータを送信します（届く側にわかるように）
-response = client.recv(512) #レシーブは適当な2の累乗にします（大きすぎるとダメ）
+ServerAddr= "192.168.20.238"
+ServerPort= 8629
+mes = "192.168.20.72 NA read\n"
 
-print(response test)
+clientSock= socket.socket()
+clientSock.connect( ( ServerAddr, ServerPort))
+clientSock.send(mes.encode("UTF-8"))
+#clientSock.send(mes)
+clientSock.shutdown( 1)
+res=""
+while True:
+    data= clientSock.recv( 2048)
+    #print(data)
+    if not data: break
+    res+=data.decode("UTF-8")
+    print (res,end="")
+clientSock.close()

@@ -1,23 +1,11 @@
-# ソケットライブラリ取り込み
 import socket
 
-# サーバーIPとポート番号
-IPADDR = "127.0.0.1"
-PORT = 49152
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.bind((socket.gethostname(), 1235))  # IPとポート番号を指定します
+s.listen(5)
 
-# AF_INET：IPv4形式でソケット作成(省略可)
-sock_sv = socket.socket(socket.AF_INET)
-# IPアドレスとポート番号でバインド、タプルで指定
-sock_sv.bind((IPADDR, PORT))
-# サーバー有効化
-sock_sv.listen()
-
-# 接続・受信の無限ループ
 while True:
-    # クライアントの接続受付
-    sock_cl, addr = sock_sv.accept()
-    # ソケットから byte 形式でデータ受信
-    data = sock_cl.recv(1024)
-    print(data.decode("utf-8"))
-    # クライアントのソケットを閉じる
-    sock_cl.close()
+    clientsocket, address = s.accept()
+    print(f"Connection from {address} has been established!")
+    clientsocket.send(bytes("Welcome to the server!", 'utf-8'))
+    clientsocket.close()
