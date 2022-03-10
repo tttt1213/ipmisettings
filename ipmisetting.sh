@@ -1,10 +1,8 @@
 #!/bin/bash 
 
 #IPMI
-
-
 #cd /mnt/ipmicfg/Smaru/Linux64/
-cd /mnt/mori/IPMICFG_1.33.1_build.211123/IPMICFG_1.33.1_build.211123/Linux/64bit
+moricd /mnt/mori/IPMICFG_1.33.1_build.211123/IPMICFG_1.33.1_build.211123/Linux/64bit
 
 
 #read -p "input IPMI password:"  password
